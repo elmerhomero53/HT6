@@ -193,7 +193,7 @@ public class MainMaps {
 	    if(tipoMapa.equals("1")) {
 	    	
 	    	Scanner por_tipo = new Scanner(System.in);
-	    	System.out.println("Por tipo? s/n  NOTA: AL SELECCIONAR SI, ES POSIBLE QUE EL ORDENAMIENTO TARDE EN COMPLETARSE");
+	    	System.out.println("Por tipo? s/n ");
 	    	String por_tipo1 = por_tipo.nextLine();
 	    	
 	    	HashMap<String, String> map = new HashMap<String,String>();
@@ -217,27 +217,26 @@ public class MainMaps {
 			        		String k = partes[0];
 			        		String v = partes[1];
 			        		
-			        		map.put(k, v);
-			        		
-			        		List<Entry<String,String>> sort = new LinkedList<Entry<String,String>>(map.entrySet());
-
-			        		Collections.sort(sort, new Comparator<Entry<String,String>>() {
-								@Override
-								public int compare(Entry<String, String> o1, Entry<String, String> o2) {
-									// TODO Auto-generated method stub
-									return o1.getValue().compareTo(o2.getValue());
-								}
-							});
-			        		
-			        		for (Entry<String,String> item: sort) {
-			        			System.out.println(item);
-			        		}
-			        		
+			        		map.put(k, v);			        		
 			        		
 			        	}else {
 			        		System.out.println("Linea ignorada: " + linea);
 			        	}	
 			         }
+				
+				List<Entry<String,String>> sort = new LinkedList<Entry<String,String>>(map.entrySet());
+
+		        		Collections.sort(sort, new Comparator<Entry<String,String>>() {
+							@Override
+							public int compare(Entry<String, String> o1, Entry<String, String> o2) {
+								// TODO Auto-generated method stub
+								return o1.getValue().compareTo(o2.getValue());
+							}
+						});
+		        		
+		        		for (Entry<String,String> item: sort) {
+		        			System.out.println(item);
+		        		}
 			         
 			         
 			         
@@ -316,7 +315,7 @@ public class MainMaps {
 		    	TreeMap<String, String> map = new TreeMap<String, String>();
 		    	
 		    	Scanner por_tipo = new Scanner(System.in);
-		    	System.out.println("Por tipo? s/n  NOTA: AL SELECCIONAR SI, ES POSIBLE QUE EL ORDENAMIENTO TARDE EN COMPLETARSE");
+		    	System.out.println("Por tipo? s/n ");
 		    	String por_tipo1 = por_tipo.nextLine();
 		    	
 		    	if(por_tipo1.equals("s")) {
@@ -338,26 +337,24 @@ public class MainMaps {
 				        		
 				        		map.put(k, v);
 				        		
-				        		List<Entry<String,String>> sort = new LinkedList<Entry<String,String>>(map.entrySet());
-
-				        		Collections.sort(sort, new Comparator<Entry<String,String>>() {
-									@Override
-									public int compare(Entry<String, String> o1, Entry<String, String> o2) {
-										// TODO Auto-generated method stub
-										return o1.getValue().compareTo(o2.getValue());
-									}
-								});
-				        		
-				        		for (Entry<String,String> item: sort) {
-				        			System.out.println(item);
-				        		}
-				        		
-				        		
-				        	}else {
+						}else {
 				        		System.out.println("Linea ignorada: " + linea);
 				        	}	
 				         }
 				         
+					List<Entry<String,String>> sort = new LinkedList<Entry<String,String>>(map.entrySet());
+
+		        		Collections.sort(sort, new Comparator<Entry<String,String>>() {
+							@Override
+							public int compare(Entry<String, String> o1, Entry<String, String> o2) {
+								// TODO Auto-generated method stub
+								return o1.getValue().compareTo(o2.getValue());
+							}
+						});
+		        		
+		        		for (Entry<String,String> item: sort) {
+		        			System.out.println(item);
+		        		}
 				         
 				         
 				    }catch(Exception e){
@@ -435,7 +432,7 @@ public class MainMaps {
 		    	
 		    	
 		    	Scanner por_tipo = new Scanner(System.in);
-		    	System.out.println("Por tipo? s/n  NOTA: AL SELECCIONAR SI, ES POSIBLE QUE EL ORDENAMIENTO TARDE EN COMPLETARSE");
+		    	System.out.println("Por tipo? s/n ");
 		    	String por_tipo1 = por_tipo.nextLine();
 		    	
 		    	if(por_tipo1.equals("s")) {
@@ -456,27 +453,26 @@ public class MainMaps {
 				        		String v = partes[1];
 				        		
 				        		map.put(k, v);
-				        		
-				        		List<Entry<String,String>> sort = new LinkedList<Entry<String,String>>(map.entrySet());
-
-				        		Collections.sort(sort, new Comparator<Entry<String,String>>() {
-									@Override
-									public int compare(Entry<String, String> o1, Entry<String, String> o2) {
-										// TODO Auto-generated method stub
-										return o1.getValue().compareTo(o2.getValue());
-									}
-								});
-				        		
-				        		for (Entry<String,String> item: sort) {
-				        			System.out.println(item);
-				        		}
-				        		
-				        		
+			
 				        	}else {
 				        		System.out.println("Linea ignorada: " + linea);
 				        	}	
 				         }
-				         		         
+				         	
+					List<Entry<String,String>> sort = new LinkedList<Entry<String,String>>(map.entrySet());
+
+		        		Collections.sort(sort, new Comparator<Entry<String,String>>() {
+							@Override
+							public int compare(Entry<String, String> o1, Entry<String, String> o2) {
+								// TODO Auto-generated method stub
+								return o1.getValue().compareTo(o2.getValue());
+							}
+						});
+		        		
+		        		for (Entry<String,String> item: sort) {
+		        			System.out.println(item);
+		        		}
+					
 				    }catch(Exception e){
 				    	System.out.println("Hubo un error!");
 				         
