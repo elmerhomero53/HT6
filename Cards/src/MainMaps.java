@@ -96,7 +96,7 @@ public class MainMaps {
 						}else {
 							linea = nombre1+"|"+tipo1;
 							FileWriter fw = new FileWriter(filename,true); //the true will append the new data
-						    fw.write(linea+"\n");//appends the string to the file
+						    fw.write("\n"+linea+"\n");//appends the string to the file
 						    fw.close();
 						    System.out.println("Nueva carta agregada!");
 						}
