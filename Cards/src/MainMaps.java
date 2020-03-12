@@ -1,27 +1,23 @@
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.Formatter;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map.Entry;
 import java.util.Scanner;
-import java.util.Set;
 import java.util.TreeMap;
 import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.nio.file.StandardOpenOption;
+
 /**
- * @author Usuario Dell
+ * @author Mario de Leon
+ * @author Jose Ramos
  *
  */
 public class MainMaps {
@@ -31,8 +27,6 @@ public class MainMaps {
 	 */
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		
-		MapUtil util = new MapUtil();
 		
 		System.out.println("***Cards***");
 		String path = (new File("")).getAbsolutePath()+File.separator+"cards_desc.txt";
@@ -112,7 +106,7 @@ public class MainMaps {
 				}
 				catch(IOException ioe)
 				{
-				    System.err.println("IOException: " + ioe.getMessage());
+				    System.out.println("Archivo no encontrado!");
 				}
 		
 	    }
@@ -153,7 +147,7 @@ public class MainMaps {
 		         }
 	      
 		    }catch(Exception e){
-		         e.printStackTrace();
+		    	System.out.println("Hubo un error!");
 		         
 		         
 		      }finally{
@@ -165,7 +159,7 @@ public class MainMaps {
 		               fr.close();     
 		            }                  
 		         }catch (Exception e2){ 
-		            e2.printStackTrace();
+		        	 System.out.println("Hubo un error!");
 		         }
 		      }
 	    	
@@ -199,7 +193,7 @@ public class MainMaps {
 	    if(tipoMapa.equals("1")) {
 	    	
 	    	Scanner por_tipo = new Scanner(System.in);
-	    	System.out.println("Por tipo? s/n");
+	    	System.out.println("Por tipo? s/n  NOTA: AL SELECCIONAR SI, ES POSIBLE QUE EL ORDENAMIENTO TARDE EN COMPLETARSE");
 	    	String por_tipo1 = por_tipo.nextLine();
 	    	
 	    	HashMap<String, String> map = new HashMap<String,String>();
@@ -225,18 +219,30 @@ public class MainMaps {
 			        		
 			        		map.put(k, v);
 			        		
+			        		List<Entry<String,String>> sort = new LinkedList<Entry<String,String>>(map.entrySet());
+
+			        		Collections.sort(sort, new Comparator<Entry<String,String>>() {
+								@Override
+								public int compare(Entry<String, String> o1, Entry<String, String> o2) {
+									// TODO Auto-generated method stub
+									return o1.getValue().compareTo(o2.getValue());
+								}
+							});
 			        		
+			        		for (Entry<String,String> item: sort) {
+			        			System.out.println(item);
+			        		}
 			        		
 			        		
 			        	}else {
 			        		System.out.println("Linea ignorada: " + linea);
 			        	}	
 			         }
-			         //Regresa las keys con un set de valores
+			         
 			         
 			         
 			    }catch(Exception e){
-			         e.printStackTrace();
+			    	System.out.println("Hubo un error!");
 			         
 			         
 			      }finally{
@@ -248,23 +254,10 @@ public class MainMaps {
 			               fr.close();     
 			            }                  
 			         }catch (Exception e2){ 
-			            e2.printStackTrace();
+			        	 System.out.println("Hubo un error!");
 			         }
 			      }
-	    		
-	    		
-	    		
-	    		
-	    		
-	    		
-	    		
-	    		
-	    		
-	    		
-	    		
-	    		
-	    		
-	    		
+	    		    		
 	    	}else if(por_tipo1.equals("n")) {
 			    
 			    try {
@@ -307,114 +300,250 @@ public class MainMaps {
 			               fr.close();     
 			            }                  
 			         }catch (Exception e2){ 
-			            e2.printStackTrace();
+			        	 System.out.println("Hubo un error!");
 			         }
 			      }
 		
+	    	}else {
+	    		System.out.println("Opcion no valida.");
 	    	}
 		    
 		    /**
 		     * Ver baraja completa usando TreeMap
 		     */
 		    }else if (tipoMapa.equals("2")){
-		    	TreeMap<String, String> map = new TreeMap<String, String>();
-			    try {
-			         // Apertura del fichero y creacion de BufferedReader para poder
-			         // hacer una lectura comoda (disponer del metodo readLine()).
-			         archivo = new File (path);
-			         fr = new FileReader (archivo);
-			         br = new BufferedReader(fr);
-			         
-			         String linea;
-			         while((linea=br.readLine())!=null)
-			         {
-			        	//System.out.println(linea);
-			        	String[] partes = linea.split("\\|",2);
-			        	if(partes.length >= 2) {
-			        		String k = partes[0];
-			        		String v = partes[1];
-			        		
-			        		map.put(k, v);
-			        	}else {
-			        		System.out.println("Linea ignorada: " + linea);
-			        	}	
-			         }
-			         //Regresa las keys con un set de valores
-			         for (String key : map.keySet())
-			         {
-			             System.out.println(key + ":" + map.get(key));
-			         }
-		      
-			    }catch(Exception e){
-			         e.printStackTrace();
-			         
-			         
-			      }finally{
-			         // En el finally cerramos el fichero, para asegurarnos
-			         // que se cierra tanto si todo va bien como si salta 
-			         // una excepcion.
-			         try{                    
-			            if( null != fr ){   
-			               fr.close();     
-			            }                  
-			         }catch (Exception e2){ 
-			            e2.printStackTrace();
-			         }
 		    	
-			      }
-	
+		    	TreeMap<String, String> map = new TreeMap<String, String>();
+		    	
+		    	Scanner por_tipo = new Scanner(System.in);
+		    	System.out.println("Por tipo? s/n  NOTA: AL SELECCIONAR SI, ES POSIBLE QUE EL ORDENAMIENTO TARDE EN COMPLETARSE");
+		    	String por_tipo1 = por_tipo.nextLine();
+		    	
+		    	if(por_tipo1.equals("s")) {
+		    		try {
+				         // Apertura del fichero y creacion de BufferedReader para poder
+				         // hacer una lectura comoda (disponer del metodo readLine()).
+				         archivo = new File (path);
+				         fr = new FileReader (archivo);
+				         br = new BufferedReader(fr);
+				         
+				         String linea;
+				         while((linea=br.readLine())!=null)
+				         {
+				        	//System.out.println(linea);
+				        	String[] partes = linea.split("\\|",2);
+				        	if(partes.length >= 2) {
+				        		String k = partes[0];
+				        		String v = partes[1];
+				        		
+				        		map.put(k, v);
+				        		
+				        		List<Entry<String,String>> sort = new LinkedList<Entry<String,String>>(map.entrySet());
+
+				        		Collections.sort(sort, new Comparator<Entry<String,String>>() {
+									@Override
+									public int compare(Entry<String, String> o1, Entry<String, String> o2) {
+										// TODO Auto-generated method stub
+										return o1.getValue().compareTo(o2.getValue());
+									}
+								});
+				        		
+				        		for (Entry<String,String> item: sort) {
+				        			System.out.println(item);
+				        		}
+				        		
+				        		
+				        	}else {
+				        		System.out.println("Linea ignorada: " + linea);
+				        	}	
+				         }
+				         
+				         
+				         
+				    }catch(Exception e){
+				    	System.out.println("Hubo un error!");
+				         
+				         
+				      }finally{
+				         // En el finally cerramos el fichero, para asegurarnos
+				         // que se cierra tanto si todo va bien como si salta 
+				         // una excepcion.
+				         try{                    
+				            if( null != fr ){   
+				               fr.close();     
+				            }                  
+				         }catch (Exception e2){ 
+				        	 System.out.println("Hubo un error!");
+				         }
+				      }
+		    		
+		    	}else if(por_tipo1.equals("n")) {
+		    	
+				    try {
+				         // Apertura del fichero y creacion de BufferedReader para poder
+				         // hacer una lectura comoda (disponer del metodo readLine()).
+				         archivo = new File (path);
+				         fr = new FileReader (archivo);
+				         br = new BufferedReader(fr);
+				         
+				         String linea;
+				         while((linea=br.readLine())!=null)
+				         {
+				        	//System.out.println(linea);
+				        	String[] partes = linea.split("\\|",2);
+				        	if(partes.length >= 2) {
+				        		String k = partes[0];
+				        		String v = partes[1];
+				        		
+				        		map.put(k, v);
+				        	}else {
+				        		System.out.println("Linea ignorada: " + linea);
+				        	}	
+				         }
+				         //Regresa las keys con un set de valores
+				         for (String key : map.keySet())
+				         {
+				             System.out.println(key + ":" + map.get(key));
+				         }
+			      
+				    }catch(Exception e){
+				    	System.out.println("Hubo un error!");
+				         
+				         
+				      }finally{
+				         // En el finally cerramos el fichero, para asegurarnos
+				         // que se cierra tanto si todo va bien como si salta 
+				         // una excepcion.
+				         try{                    
+				            if( null != fr ){   
+				               fr.close();     
+				            }                  
+				         }catch (Exception e2){ 
+				        	 System.out.println("Hubo un error!");
+				         }
+			    	
+				      }
+		    	}else {
+		    		System.out.println("Opcion no valida.");
+		    	}
 			    
 			    /**
 			     * Ver baraja completa usando LinkedHashMap
 			     */
 		    }else if(tipoMapa.equals("3")) {
 		    	LinkedHashMap<String, String> map = new LinkedHashMap<String, String>();
-			    try {
-			         // Apertura del fichero y creacion de BufferedReader para poder
-			         // hacer una lectura comoda (disponer del metodo readLine()).
-			         archivo = new File (path);
-			         fr = new FileReader (archivo);
-			         br = new BufferedReader(fr);
-			         
-			         String linea;
-			         while((linea=br.readLine())!=null)
-			         {
-			        	//System.out.println(linea);
-			        	String[] partes = linea.split("\\|",2);
-			        	if(partes.length >= 2) {
-			        		String k = partes[0];
-			        		String v = partes[1];
-			        		
-			        		map.put(k, v);
-			        	}else {
-			        		System.out.println("Linea ignorada: " + linea);
-			        	}	
-			         }
-			         //Regresa las keys con un set de valores
-			         for (String key : map.keySet())
-			         {
-			             System.out.println(key + ":" + map.get(key));
-			         }
-		      
-			    }catch(Exception e){
-			         e.printStackTrace();
-			         
-			         
-			      }finally{
-			         // En el finally cerramos el fichero, para asegurarnos
-			         // que se cierra tanto si todo va bien como si salta 
-			         // una excepcion.
-			         try{                    
-			            if( null != fr ){   
-			               fr.close();     
-			            }                  
-			         }catch (Exception e2){ 
-			            e2.printStackTrace();
-			         }
 		    	
-			      }
+		    	
+		    	Scanner por_tipo = new Scanner(System.in);
+		    	System.out.println("Por tipo? s/n  NOTA: AL SELECCIONAR SI, ES POSIBLE QUE EL ORDENAMIENTO TARDE EN COMPLETARSE");
+		    	String por_tipo1 = por_tipo.nextLine();
+		    	
+		    	if(por_tipo1.equals("s")) {
+		    		try {
+				         // Apertura del fichero y creacion de BufferedReader para poder
+				         // hacer una lectura comoda (disponer del metodo readLine()).
+				         archivo = new File (path);
+				         fr = new FileReader (archivo);
+				         br = new BufferedReader(fr);
+				         
+				         String linea;
+				         while((linea=br.readLine())!=null)
+				         {
+				        	//System.out.println(linea);
+				        	String[] partes = linea.split("\\|",2);
+				        	if(partes.length >= 2) {
+				        		String k = partes[0];
+				        		String v = partes[1];
+				        		
+				        		map.put(k, v);
+				        		
+				        		List<Entry<String,String>> sort = new LinkedList<Entry<String,String>>(map.entrySet());
+
+				        		Collections.sort(sort, new Comparator<Entry<String,String>>() {
+									@Override
+									public int compare(Entry<String, String> o1, Entry<String, String> o2) {
+										// TODO Auto-generated method stub
+										return o1.getValue().compareTo(o2.getValue());
+									}
+								});
+				        		
+				        		for (Entry<String,String> item: sort) {
+				        			System.out.println(item);
+				        		}
+				        		
+				        		
+				        	}else {
+				        		System.out.println("Linea ignorada: " + linea);
+				        	}	
+				         }
+				         		         
+				    }catch(Exception e){
+				    	System.out.println("Hubo un error!");
+				         
+				         
+				      }finally{
+				         // En el finally cerramos el fichero, para asegurarnos
+				         // que se cierra tanto si todo va bien como si salta 
+				         // una excepcion.
+				         try{                    
+				            if( null != fr ){   
+				               fr.close();     
+				            }                  
+				         }catch (Exception e2){ 
+				        	 System.out.println("Hubo un error!");
+				         }
+				      }
+		    	}else if(por_tipo1.equals("n")) {
+				    try {
+				         // Apertura del fichero y creacion de BufferedReader para poder
+				         // hacer una lectura comoda (disponer del metodo readLine()).
+				         archivo = new File (path);
+				         fr = new FileReader (archivo);
+				         br = new BufferedReader(fr);
+				         
+				         String linea;
+				         while((linea=br.readLine())!=null)
+				         {
+				        	//System.out.println(linea);
+				        	String[] partes = linea.split("\\|",2);
+				        	if(partes.length >= 2) {
+				        		String k = partes[0];
+				        		String v = partes[1];
+				        		
+				        		map.put(k, v);
+				        	}else {
+				        		System.out.println("Linea ignorada: " + linea);
+				        	}	
+				         }
+				         //Regresa las keys con un set de valores
+				         for (String key : map.keySet())
+				         {
+				             System.out.println(key + ":" + map.get(key));
+				         }
+			      
+				    }catch(Exception e){
+				    	System.out.println("Hubo un error!");
+				         
+				         
+				      }finally{
+				         // En el finally cerramos el fichero, para asegurarnos
+				         // que se cierra tanto si todo va bien como si salta 
+				         // una excepcion.
+				         try{                    
+				            if( null != fr ){   
+				               fr.close();     
+				            }                  
+				         }catch (Exception e2){ 
+				        	 System.out.println("Hubo un error!");
+				         }
+			    	
+				      }
 	
-		    	
+			    	}else {
+			    		System.out.println("Opcion no valida.");
+			    	}
+		    }else{
+		    	System.out.println("Opcion no valida.");
 		    }
 	    
 	    /**
@@ -459,7 +588,7 @@ public class MainMaps {
 		         }
 	      
 		    }catch(Exception e){
-		         e.printStackTrace();       
+		    	System.out.println("Hubo un error!");      
 		      }finally{
 		         // En el finally cerramos el fichero, para asegurarnos
 		         // que se cierra tanto si todo va bien como si salta 
@@ -469,7 +598,7 @@ public class MainMaps {
 		               fr.close();     
 		            }                  
 		         }catch (Exception e2){ 
-		            e2.printStackTrace();
+		        	 System.out.println("Hubo un error!");
 		         }
 		      }
 		    	
@@ -477,6 +606,8 @@ public class MainMaps {
 		    System.out.println("Cantidad de cartas tipo Monstruo: "+monstruo.size());
 		    System.out.println("Cantidad de cartas tipo Hechizo: "+hechizo.size());
 	    	 	
+	    }else {
+	    	System.out.println("Opcion no valida.");
 	    }
 	}
 	
