@@ -29,7 +29,7 @@ public class MainMaps {
 		
 		//tenemos aca el codigo para poder
 		//hacerle el profile al codigo y medir el tiempo
-		long startTime = System.nanoTime();
+		//long startTime = System.nanoTime();
 	
 		System.out.println("***Cards***");
 		String path = (new File("")).getAbsolutePath()+File.separator+"cards_desc.txt";
@@ -43,8 +43,6 @@ public class MainMaps {
 		PrintWriter pw = null;
 		
 		
-	    
-	    
 	    Scanner eleccion1 = new Scanner(System.in);
 	    System.out.println("Que hacer? \n1.Agregar Carta \n2.Ver carta \n3.Mostrar todas las cartas \n4.Mostrar estadisticas de las cartas (cantidad de cartas de cada tipo)");
 	    String eleccion1A = eleccion1.nextLine();
@@ -609,11 +607,11 @@ public class MainMaps {
 	    	System.out.println("Opcion no valida.");
 	    }
 
-		long endTime = System.nanoTime();
+		//long endTime = System.nanoTime();
 		
 		//Diferencia en Ns
-		long timeElapsed = endTime - startTime;
+		//long timeElapsed = endTime - startTime;
 		
-		System.out.println("Tiempo de ejecucion en nanosegundos  : " + timeElapsed);
+		//System.out.println("Tiempo de ejecucion en nanosegundos  : " + timeElapsed);
 	}
 }
