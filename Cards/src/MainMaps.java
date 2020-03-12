@@ -21,13 +21,16 @@ import java.io.PrintWriter;
  *
  */
 public class MainMaps {
-	
 	/**
 	 * @param args
 	 */
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		
+		//tenemos aca el codigo para poder
+		//hacerle el profile al codigo y medir el tiempo
+		long startTime = System.nanoTime();
+	
 		System.out.println("***Cards***");
 		String path = (new File("")).getAbsolutePath()+File.separator+"cards_desc.txt";
 		
@@ -605,6 +608,12 @@ public class MainMaps {
 	    }else {
 	    	System.out.println("Opcion no valida.");
 	    }
+
+		long endTime = System.nanoTime();
+		
+		//Diferencia en Ns
+		long timeElapsed = endTime - startTime;
+		
+		System.out.println("Tiempo de ejecucion en nanosegundos  : " + timeElapsed);
 	}
-	
 }
